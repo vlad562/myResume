@@ -1,13 +1,142 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="./js/main.js"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="/vite.svg"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link
+			rel="stylesheet"
+			href="./css/style.css"
+		/>
+		<title>Vite App</title>
+	</head>
+	<body>
+		<div id="app">
+			<div class="resume">
+				<div class="container">
+					<header class="resume__header">
+						<div class="resume__photo-wrapper">
+							<img
+								class="resume__photo"
+								src="./public/profile-photo.png"
+								alt="Profile photo"
+							/>
+						</div>
+						<div class="resume__intro">
+							<p class="resume__greeting">Hello 👋 I’m</p>
+							<h3 class="resume__name">Karthik SR</h3>
+							<p class="resume__position">UX/UI Designer</p>
+						</div>
+
+						<div class="resume__languages">
+							<h2 class="resume__section-title">Languages</h2>
+							<ul class="resume__languages-list">
+								<li class="resume__language">
+									<p class="resume__language-name">English</p>
+									<span class="resume__language-bar" />
+								</li>
+								<li class="resume__language">
+									<p class="resume__language-name">Malayalam</p>
+									<span class="resume__language-bar" />
+								</li>
+								<li class="resume__language">
+									<p class="resume__language-name">Hindi</p>
+									<span class="resume__language-bar" />
+								</li>
+							</ul>
+						</div>
+					</header>
+
+					<section class="resume__experience">
+						<h1 class="resume__section-title">Experience</h1>
+
+						<div class="resume__job last">
+							<div class="resume__job-header">
+								<p class="resume__job-date">Jun. 2023 – Present</p>
+								<h3 class="resume__job-title">most recent</h3>
+							</div>
+							<div class="resume__job-vacancy">
+								<div class="resume__job-info">
+									<p class="resume__job-position">Marketing Manager</p>
+									<p class="resume__job-compony last">Pankayam | Full-time</p>
+								</div>
+
+								<div class="resume__job-text">
+									<ul class="resume__job-list">
+										<li>
+											Strategy development and planning of campaigns that promote the business and generate genuine traffic
+										</li>
+										<li>SEO Content Creation for Blogs, Website, Social media</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="resume__job">
+							<div class="resume__job-header">
+								<p class="resume__job-date">2017 - Present</p>
+							</div>
+							<div class="resume__job-vacancy">
+								<div class="resume__job-info">
+									<p class="resume__job-position">Graphic / Web designer</p>
+									<p class="resume__job-compony" style="color: #000;">Freelance</p>
+								</div>
+
+								<div class="resume__job-text">
+									<ul class="resume__job-list">
+										<li>
+											Development of internal projects from scratch, product
+											design of brands
+										</li>
+										<li>Landing page, webapps and hybrid apps</li>
+										<li>
+											Coordinating with outside agencies, art services, web
+											designer, marketing, printers, and colleagues as
+											necessary.
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+                        <div class="resume__job">
+							<div class="resume__job-header">
+								<p class="resume__job-date">Sep. 2021 - Jun. 2023</p>
+							</div>
+							<div class="resume__job-vacancy">
+								<div class="resume__job-info">
+									<p class="resume__job-position">Legal Assistant</p>
+									<p class="resume__job-compony" style="color: #000;">Law Firm | Intern</p>
+								</div>
+
+								<div class="resume__job-text"> 
+									<ul class="resume__job-list">
+										<li>
+											Provide administrative support to lawyer and enhance office effectiveness
+										</li>
+										<li>Handle communication with clients, witnesses etc.</li>
+										<li>
+											repare case briefs and summarize depositions, interrogatories and testimony
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</section>
+				</div>
+			</div>
+		</div>
+		<script
+			type="module"
+			src="./js/main.js"
+		></script>
+	</body>
 </html>
