@@ -1,3 +1,15 @@
+@keyframes blinkFocus {
+	0% {
+		box-shadow: 0 0 0px rgba(0, 0, 255, 0.3);
+	}
+	50% {
+		box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
+	}
+	100% {
+		box-shadow: 0 0 0px rgba(0, 0, 255, 0.3);
+	}
+}
+
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
@@ -53,10 +65,6 @@ body {
 	color: var(--color-text);
 	border-radius: var(--radius-md);
 	font-size: var(--font-size-sm);
-
-
-
-    
 }
 
 a {
@@ -77,6 +85,9 @@ h5 {
 	margin: 0;
 	text-align: left;
 	font-weight: 500;
+
+	transition: background-color 0.3s, color 0.3s;
+	outline: none;
 }
 
 ul {
@@ -129,7 +140,7 @@ button:focus-visible {
 
 .container {
 	width: 100%;
-	max-width: 1000px;
+	max-width: 555px;
 	margin: 0 auto;
 }
 
@@ -164,8 +175,7 @@ button:focus-visible {
 .resume__intro {
 	padding: var(--spacing-sm);
 	text-align: center;
-	min-width: 100px;
-	flex: 1 1 0;
+	min-width: 124px;
 }
 
 .resume__greeting {
@@ -205,22 +215,40 @@ button:focus-visible {
 .resume__languages-list {
 	font-size: var(--font-size-sm);
 	line-height: 1.04;
+	width: 100%;
+	max-width: 350px;
+}
+.resume__language {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+  width: 100%;             /* занять всю доступную ширину */
+  max-width: 100%;         /* не выходить за родителя */
+  gap: var(--spacing-sm);  /* отступ между именем и полоской */
 }
 
-.resume__language {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: var(--spacing-xs);
+.resume__language-name {
+	flex-shrink: 0; /* не сжимаем имя */
+	width: 58px; /* фиксированная ширина имени */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .resume__language-bar {
-	flex: 1;
-	height: 10px;
-	background: var(--color-green);
-	border-radius: var(--radius-md);
-	margin-left: var(--spacing-sm);
+  flex-shrink: 1;           /* позволяет сжиматься при сужении родителя */
+  width: 150px;             /* стартовая ширина полосы */
+  max-width: 100%;          /* максимум - не выходить за родителя */
+  min-width: 10px;          /* минимальная ширина */
+  resize: horizontal;
+  height: 10px;
+  background: var(--color-green);
+  border-radius: var(--radius-md);
+  margin-left: var(--spacing-sm);
+  overflow: hidden;
+  display: block;
 }
+
 
 /* ---------- MAIN ---------- */
 
@@ -324,7 +352,6 @@ button:focus-visible {
 	padding: var(--font-size-sm) 24px;
 	width: 100%;
 	max-width: 124px;
-	/* display: none; */
 }
 
 .resume__section-header {
@@ -382,7 +409,6 @@ button:focus-visible {
 	padding: 12px 8px 12px 12px;
 	width: 100%;
 	max-width: 268px;
-
 }
 
 .resume__education-header {
@@ -397,7 +423,7 @@ button:focus-visible {
 
 .resume__education-card {
 	width: 100%;
-	max-width: 100px;
+	max-width: 116px;
 	padding: 8px;
 	border-radius: 10px;
 	background-color: var(--color-jon-card);
@@ -505,17 +531,17 @@ button:focus-visible {
 		width: 124px;
 	}
 
-    .resume__additionally {
-        max-width: 100%;
-    }
+	.resume__additionally {
+		max-width: 100%;
+	}
 
-    .resume__email {
-        max-width: 100%;
-    }
+	.resume__email {
+		max-width: 100%;
+	}
 
-    .resume__interests {
-        height: 69%;
-    }
+	.resume__interests {
+		height: 69%;
+	}
 }
 
 @media (max-width: 577px) {
@@ -524,10 +550,20 @@ button:focus-visible {
 	}
 }
 
-
 @media (max-width: 407px) {
-    .resume__education {
-        width: 100%;
-        flex: 1 0 0;
-    }
+	.resume__education {
+		width: 100%;
+		flex: 1 0 0;
+	}
+}
+
+[contenteditable="true"] {
+	outline: none;
+	transition: background-color 0.3s, box-shadow 0.3s;
+	cursor: text;
+}
+
+[contenteditable="true"]:focus {
+	background-color: #f0f8ff;
+	box-shadow: 0 0 5px rgba(0, 128, 255, 0.4);
 }

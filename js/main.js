@@ -21,11 +21,126 @@
 //   </div>
 // `
 
-
-
 // setupCounter(document.querySelector("#counter"))
 
-document.querySelectorAll("p").forEach(p => {
-	console.log("hello")
-	p.setAttribute("contenteditable", "true")
+const classLimits = {
+	"resume__greeting": 30,
+	"resume__position": 30,
+	"resume__language-name": 30,
+	"resume__job-date": 30,
+	"resume__job-position": 30,
+	"resume__job-company": 30,
+	"resume__education-text": 30,
+	"resume__education-tags": 30,
+	"resume__education-program": 30,
+	"resume__interests-item": 30,
+	"resume__email-text": 30,
+	"resume__section-title": 30,
+	"resume__name": 24,
+	"resume__job-title": 30,
+	"resume__section-header": 30,
+	"resume__tools-title": 30,
+	"resume__education-time": 30,
+	"resume__email-header": 30,
+}
+
+const tags = "p, h1, h2, h3, h4, h5"
+
+// Функция сохранения в localStorage
+function saveContent(key, value) {
+	localStorage.setItem(key, value)
+}
+// Функция загрузки из localStorage
+function loadContent(key) {
+	return localStorage.getItem(key)
+}
+
+document.querySelectorAll(tags).forEach(el => {
+	const matchedClass = Object.keys(classLimits).find(cls =>
+		el.classList.contains(cls)
+	)
+	if (matchedClass) {
+		const limit = classLimits[matchedClass]
+		el.setAttribute("contenteditable", "true")
+
+		// Загружаем сохраненный текст, если есть
+		const saved = loadContent(el.className)
+		if (saved) {
+			el.innerText = saved
+		}
+
+		el.addEventListener("input", () => {
+			if (el.innerText.length > limit) {
+				el.innerText = el.innerText.slice(0, limit)
+				// курсор в конец
+				const range = document.createRange()
+				const sel = window.getSelection()
+				range.selectNodeContents(el)
+				range.collapse(false)
+				sel.removeAllRanges()
+				sel.addRange(range)
+			}
+			saveContent(el.className, el.innerText)
+		})
+	}
+})
+
+document.querySelectorAll(".resume__job-list li").forEach(el => {
+	const limit = 30
+	el.setAttribute("contenteditable", "true")
+
+	// Загружаем сохраненный текст, если есть
+	const saved = loadContent(el.className + "-" + el.textContent.slice(0, 10))
+	if (saved) {
+		el.innerText = saved
+	}
+
+	el.addEventListener("input", () => {
+		if (el.innerText.length > limit) {
+			el.innerText = el.innerText.slice(0, limit)
+			// курсор в конец
+			const range = document.createRange()
+			const sel = window.getSelection()
+			range.selectNodeContents(el)
+			range.collapse(false)
+			sel.removeAllRanges()
+			sel.addRange(range)
+		}
+		// Для li используем уникальный ключ, можно улучшить
+		saveContent(el.className + "-" + el.textContent.slice(0, 10), el.innerText)
+	})
+})
+
+document.getElementById("download-btn").addEventListener("click", () => {
+	const element = document.querySelector(".resume") // или весь body
+
+	document.getElementById("download-btn").style.display = "none"
+
+	const opt = {
+		margin: 0.5,
+		filename: "resume.pdf",
+		image: { type: "jpeg", quality: 0.98 },
+		html2canvas: { scale: 3 },
+		jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+	}
+
+	html2pdf()
+		.set(opt)
+		.from(element)
+		.save()
+		.then(() => {
+			document.getElementById("download-btn").style.display = "block"
+		})
+})
+
+const bars = document.querySelectorAll(".resume__language-bar")
+bars.forEach(bar => {
+	const observer = new ResizeObserver(entries => {
+		for (let entry of entries) {
+			const width = entry.contentRect.width
+			console.log(`New width: ${width}px`)
+			// Можно пересчитать процент, если нужно
+		}
+	})
+	observer.observe(bar)
 })
