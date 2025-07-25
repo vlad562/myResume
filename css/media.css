@@ -1,0 +1,47 @@
+@media (prefers-color-scheme: light) {
+	:root {
+		color: #213547;
+		background-color: #ffffff;
+	}
+	a:hover {
+		color: #747bff;
+	}
+	button {
+		background-color: #f9f9f9;
+	}
+}
+
+/* media */
+
+/* header */
+
+@media (max-width: 551px) {
+	.resume__education {
+		width: 124px;
+	}
+
+	.resume__additionally {
+		max-width: 100%;
+	}
+
+	.resume__email {
+		max-width: 100%;
+	}
+
+	.resume__interests {
+		height: 69%;
+	}
+}
+
+@media (max-width: 577px) {
+	.resume__intro {
+		flex: 1 1 0;
+	}
+}
+
+@media (max-width: 407px) {
+	.resume__education {
+		width: 100%;
+		flex: 1 0 0;
+	}
+}

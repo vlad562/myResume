@@ -1,6 +1,9 @@
 /* jshint esversion: 6 */
 
 import html2pdf from "html2pdf.js"
+import "../css/style.css"
+import "../css/keyframes.css"
+import "../css/media.css"
 
 // import "../css/style.css"
 // import javascriptLogo from "../javascript.svg"
@@ -45,7 +48,8 @@ const classLimits = {
 	"resume__section-header": 30,
 	"resume__tools-title": 30,
 	"resume__education-time": 30,
-	"resume__email-header": 30,
+	"resume__email-header": 1000,
+	"resume__email-text": 100,
 }
 
 const tags = "p, h1, h2, h3, h4, h5"
@@ -59,6 +63,11 @@ function loadContent(key) {
 	return localStorage.getItem(key)
 }
 
+function getStorageKey(el) {
+	// Найдём класс из classLimits, который есть у элемента
+	return Object.keys(classLimits).find(cls => el.classList.contains(cls))
+}
+
 document.querySelectorAll(tags).forEach(el => {
 	const matchedClass = Object.keys(classLimits).find(cls =>
 		el.classList.contains(cls)
@@ -68,8 +77,8 @@ document.querySelectorAll(tags).forEach(el => {
 		el.setAttribute("contenteditable", "true")
 		el.setAttribute("spellcheck", "false")
 
-		// Загружаем сохраненный текст, если есть
-		const saved = loadContent(el.className)
+		// Загружаем сохраненный текст, если есть, используя matchedClass как ключ
+		const saved = loadContent(matchedClass)
 		if (saved) {
 			el.innerText = saved
 		}
@@ -85,10 +94,12 @@ document.querySelectorAll(tags).forEach(el => {
 				sel.removeAllRanges()
 				sel.addRange(range)
 			}
-			saveContent(el.className, el.innerText)
+			// Сохраняем под стабильным ключом matchedClass
+			saveContent(matchedClass, el.innerText)
 		})
 	}
 })
+
 
 document.querySelectorAll(".resume__job-list li").forEach(el => {
 	const limit = 1000
