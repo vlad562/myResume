@@ -1,14 +1,4 @@
-@keyframes blinkFocus {
-	0% {
-		box-shadow: 0 0 0px rgba(0, 0, 255, 0.3);
-	}
-	50% {
-		box-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
-	}
-	100% {
-		box-shadow: 0 0 0px rgba(0, 0, 255, 0.3);
-	}
-}
+
 
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -67,6 +57,11 @@ body {
 	font-size: var(--font-size-sm);
 }
 
+[contenteditable="true"]:focus {
+  outline: 0    
+}
+
+
 a {
 	font-weight: 500;
 	color: #646cff;
@@ -111,9 +106,11 @@ button {
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
-	background-color: #1a1a1a;
+	background-color: #000;
 	cursor: pointer;
 	transition: border-color 0.25s;
+    color: #fff;
+    display: block;
 }
 button:hover {
 	border-color: #646cff;
@@ -215,40 +212,22 @@ button:focus-visible {
 .resume__languages-list {
 	font-size: var(--font-size-sm);
 	line-height: 1.04;
-	width: 100%;
-	max-width: 350px;
-}
-.resume__language {
-  display: flex;
-  align-items: center;
-  margin-bottom: var(--spacing-xs);
-  width: 100%;             /* занять всю доступную ширину */
-  max-width: 100%;         /* не выходить за родителя */
-  gap: var(--spacing-sm);  /* отступ между именем и полоской */
 }
 
-.resume__language-name {
-	flex-shrink: 0; /* не сжимаем имя */
-	width: 58px; /* фиксированная ширина имени */
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+.resume__language {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: var(--spacing-xs);
 }
 
 .resume__language-bar {
-  flex-shrink: 1;           /* позволяет сжиматься при сужении родителя */
-  width: 150px;             /* стартовая ширина полосы */
-  max-width: 100%;          /* максимум - не выходить за родителя */
-  min-width: 10px;          /* минимальная ширина */
-  resize: horizontal;
-  height: 10px;
-  background: var(--color-green);
-  border-radius: var(--radius-md);
-  margin-left: var(--spacing-sm);
-  overflow: hidden;
-  display: block;
+	flex: 1;
+	height: 10px;
+	background: var(--color-green);
+	border-radius: var(--radius-md);
+	margin-left: var(--spacing-sm);
 }
-
 
 /* ---------- MAIN ---------- */
 
@@ -376,7 +355,7 @@ button:focus-visible {
 }
 
 .resume__tools-title {
-	position: absolute;
+	position: absolute !important;
 	top: -8px;
 	left: 50%;
 	transform: translateX(-50%);
@@ -557,13 +536,17 @@ button:focus-visible {
 	}
 }
 
-[contenteditable="true"] {
-	outline: none;
-	transition: background-color 0.3s, box-shadow 0.3s;
-	cursor: text;
+.ripple {
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
 }
 
-[contenteditable="true"]:focus {
-	background-color: #f0f8ff;
-	box-shadow: 0 0 5px rgba(0, 128, 255, 0.4);
+.ripple span.ripple-effect {
+	position: absolute;
+	border-radius: 50%;
+	transform: scale(0);
+	animation: ripple-animation 600ms linear;
+	background-color: rgba(0, 0, 0, 0.3);
+	pointer-events: none;
 }

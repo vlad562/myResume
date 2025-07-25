@@ -1,3 +1,7 @@
+/* jshint esversion: 6 */
+
+import html2pdf from "html2pdf.js"
+
 // import "../css/style.css"
 // import javascriptLogo from "../javascript.svg"
 // import viteLogo from "/vite.svg"
@@ -19,9 +23,9 @@
 //       Click on the Vite logo to learn more
 //     </p>
 //   </div>
-// `
+// `;
 
-// setupCounter(document.querySelector("#counter"))
+// setupCounter(document.querySelector("#counter"));
 
 const classLimits = {
 	"resume__greeting": 30,
@@ -62,6 +66,7 @@ document.querySelectorAll(tags).forEach(el => {
 	if (matchedClass) {
 		const limit = classLimits[matchedClass]
 		el.setAttribute("contenteditable", "true")
+		el.setAttribute("spellcheck", "false")
 
 		// Загружаем сохраненный текст, если есть
 		const saved = loadContent(el.className)
@@ -86,11 +91,15 @@ document.querySelectorAll(tags).forEach(el => {
 })
 
 document.querySelectorAll(".resume__job-list li").forEach(el => {
-	const limit = 30
+	const limit = 1000
 	el.setAttribute("contenteditable", "true")
+	el.setAttribute("spellcheck", "false")
+
+	// Для li используем уникальный ключ (класс + первые 10 символов текста)
+	const storageKey = el.className + "-" + el.textContent.slice(0, 10)
 
 	// Загружаем сохраненный текст, если есть
-	const saved = loadContent(el.className + "-" + el.textContent.slice(0, 10))
+	const saved = loadContent(storageKey)
 	if (saved) {
 		el.innerText = saved
 	}
@@ -106,8 +115,7 @@ document.querySelectorAll(".resume__job-list li").forEach(el => {
 			sel.removeAllRanges()
 			sel.addRange(range)
 		}
-		// Для li используем уникальный ключ, можно улучшить
-		saveContent(el.className + "-" + el.textContent.slice(0, 10), el.innerText)
+		saveContent(storageKey, el.innerText)
 	})
 })
 
@@ -143,4 +151,28 @@ bars.forEach(bar => {
 		}
 	})
 	observer.observe(bar)
+})
+
+document.querySelectorAll("p, h1, h2, h3, h4, h5, li").forEach(el => {
+	el.classList.add("ripple") // добавляем класс, чтобы CSS применился
+
+	el.addEventListener("click", function (e) {
+		const ripple = document.createElement("span")
+		ripple.classList.add("ripple-effect")
+
+		const rect = el.getBoundingClientRect()
+		const size = Math.max(rect.width, rect.height)
+		ripple.style.width = ripple.style.height = size + "px"
+
+		const x = e.clientX - rect.left - size / 2
+		const y = e.clientY - rect.top - size / 2
+		ripple.style.left = x + "px"
+		ripple.style.top = y + "px"
+
+		el.appendChild(ripple)
+
+		ripple.addEventListener("animationend", () => {
+			ripple.remove()
+		})
+	})
 })
