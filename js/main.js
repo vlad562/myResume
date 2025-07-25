@@ -179,14 +179,24 @@ document.querySelectorAll("p, h1, h2, h3, h4, h5").forEach(el => {
 	})
 })
 
-document.querySelectorAll(".resume__language-range").forEach(wrapper => {
-	const input = wrapper.querySelector(".range-input")
-	const fill = wrapper.querySelector(".range-fill")
+document
+	.querySelectorAll(".resume__language-range")
+	.forEach((wrapper, index) => {
+		const input = wrapper.querySelector(".range-input")
+		const fill = wrapper.querySelector(".range-fill")
 
-	// начальное заполнение
-	fill.style.width = input.value + "%"
+		const storageKey = `language-range-${index}`
 
-	input.addEventListener("input", () => {
-		fill.style.width = input.value + "%"
+		const savedValue = localStorage.getItem(storageKey)
+		if (savedValue !== null) {
+			input.value = savedValue
+			fill.style.width = savedValue + "%"
+		} else {
+			fill.style.width = input.value + "%"
+		}
+
+		input.addEventListener("input", () => {
+			fill.style.width = input.value + "%"
+			localStorage.setItem(storageKey, input.value)
+		})
 	})
-})

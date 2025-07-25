@@ -1,4 +1,3 @@
-// webpack.config.mjs
 import path from "path"
 import { fileURLToPath } from "url"
 import { dirname } from "path"
@@ -15,7 +14,7 @@ export default {
 	output: {
 		filename: "main.js",
 		path: path.resolve(__dirname, "dist"),
-		clean: true, // очищать папку dist перед сборкой
+		clean: true, 
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -26,7 +25,7 @@ export default {
 		}),
 		new CopyPlugin({
 			patterns: [
-				{ from: "public", to: "./public" }, // копирует всё из public в dist
+				{ from: "public", to: "./public" }, 
 			],
 		}),
 	],
@@ -40,7 +39,7 @@ export default {
 				test: /\.(png|jpe?g|gif|svg)$/i,
 				type: "asset/resource",
 				generator: {
-					filename: "images/[name][ext]", // куда складывать в dist
+					filename: "images/[name][ext]",
 				},
 			},
 		],
