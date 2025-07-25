@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8" />
 		<link
 			rel="icon"
 			type="image/svg+xml"
 			href="/vite.svg"
-		>
+		/>
 		<meta
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
-		>
+		/>
 		<link
 			rel="stylesheet"
 			href="./css/style.css"
-		>
+		/>
 		<title>Vite App</title>
 	</head>
 	<body>
@@ -27,7 +27,7 @@
 								class="resume__photo"
 								src="./public/profile-photo.png"
 								alt="Profile photo"
-							>
+							/>
 						</div>
 						<div class="resume__intro">
 							<p class="resume__greeting">Hello 👋 I’m</p>
@@ -40,21 +40,48 @@
 							<ul class="resume__languages-list">
 								<li class="resume__language">
 									<p class="resume__language-name">English</p>
-									<span
-										class="resume__language-bar"
-									></span>
+									<div class="resume__language-range">
+										<input
+											type="range"
+											min="0"
+											max="100"
+											value="100"
+											class="range-input"
+										/>
+										<div class="range-bar">
+											<div class="range-fill"></div>
+										</div>
+									</div>
 								</li>
 								<li class="resume__language">
 									<p class="resume__language-name">Malayalam</p>
-									<span
-										class="resume__language-bar"
-									></span>
+									<div class="resume__language-range">
+										<input
+											type="range"
+											min="0"
+											max="100"
+											value="100"
+											class="range-input"
+										/>
+										<div class="range-bar">
+											<div class="range-fill"></div>
+										</div>
+									</div>
 								</li>
 								<li class="resume__language">
 									<p class="resume__language-name">Hindi</p>
-									<span
-										class="resume__language-bar"
-									></span>
+									<div class="resume__language-range">
+										<input
+											type="range"
+											min="0"
+											max="100"
+											value="70"
+											class="range-input"
+										/>
+										<div class="range-bar">
+											<div class="range-fill"></div>
+										</div>
+									</div>
 								</li>
 							</ul>
 						</div>
@@ -77,11 +104,15 @@
 
 									<ul class="resume__job-list">
 										<li>
-											Strategy development and planning of campaigns that
-											promote the business and generate genuine traffic
+											<p>
+												Strategy development and planning of campaigns that
+												promote the business and generate genuine traffic
+											</p>
 										</li>
 										<li>
-											SEO Content Creation for Blogs, Website, Social media
+											<p>
+												SEO Content Creation for Blogs, Website, Social media
+											</p>
 										</li>
 									</ul>
 								</div>
@@ -105,14 +136,20 @@
 									<div class="resume__job-text">
 										<ul class="resume__job-list">
 											<li>
-												Development of internal projects from scratch, product
-												design of brands
+												<p>
+													Development of internal projects from scratch, product
+													design of brands
+												</p>
 											</li>
-											<li>Landing page, webapps and hybrid apps</li>
 											<li>
-												Coordinating with outside agencies, art services, web
-												designer, marketing, printers, and colleagues as
-												necessary.
+												<p>Landing page, webapps and hybrid apps</p>
+											</li>
+											<li>
+												<p>
+													Coordinating with outside agencies, art services, web
+													designer, marketing, printers, and colleagues as
+													necessary.
+												</p>
 											</li>
 										</ul>
 									</div>
@@ -137,13 +174,19 @@
 									<div class="resume__job-text">
 										<ul class="resume__job-list">
 											<li>
-												Provide administrative support to lawyer and enhance
-												office effectiveness
+												<p>
+													Provide administrative support to lawyer and enhance
+													office effectiveness
+												</p>
 											</li>
-											<li>Handle communication with clients, witnesses etc.</li>
 											<li>
-												repare case briefs and summarize depositions,
-												interrogatories and testimony
+												<p>Handle communication with clients, witnesses etc.</p>
+											</li>
+											<li>
+												<p>
+													repare case briefs and summarize depositions,
+													interrogatories and testimony
+												</p>
 											</li>
 										</ul>
 									</div>
@@ -601,6 +644,6 @@
 			</div>
 		</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/resize-observer-polyfill@1.5.1/dist/ResizeObserver.global.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/resize-observer-polyfill@1.5.1/dist/ResizeObserver.global.js"></script>
 	</body>
 </html>

@@ -134,7 +134,7 @@ document.querySelectorAll(".resume__job-list li").forEach(el => {
 })
 
 document.getElementById("download-btn").addEventListener("click", () => {
-	const element = document.querySelector(".resume") // или весь body
+	const element = document.querySelector(".resume")
 
 	document.getElementById("download-btn").style.display = "none"
 
@@ -155,19 +155,7 @@ document.getElementById("download-btn").addEventListener("click", () => {
 		})
 })
 
-const bars = document.querySelectorAll(".resume__language-bar")
-bars.forEach(bar => {
-	const observer = new ResizeObserver(entries => {
-		for (let entry of entries) {
-			const width = entry.contentRect.width
-			console.log(`New width: ${width}px`)
-			// Можно пересчитать процент, если нужно
-		}
-	})
-	observer.observe(bar)
-})
-
-document.querySelectorAll("p, h1, h2, h3, h4, h5, li").forEach(el => {
+document.querySelectorAll("p, h1, h2, h3, h4, h5").forEach(el => {
 	el.classList.add("ripple") // добавляем класс, чтобы CSS применился
 
 	el.addEventListener("click", function (e) {
@@ -188,5 +176,17 @@ document.querySelectorAll("p, h1, h2, h3, h4, h5, li").forEach(el => {
 		ripple.addEventListener("animationend", () => {
 			ripple.remove()
 		})
+	})
+})
+
+document.querySelectorAll(".resume__language-range").forEach(wrapper => {
+	const input = wrapper.querySelector(".range-input")
+	const fill = wrapper.querySelector(".range-fill")
+
+	// начальное заполнение
+	fill.style.width = input.value + "%"
+
+	input.addEventListener("input", () => {
+		fill.style.width = input.value + "%"
 	})
 })
