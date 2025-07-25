@@ -50,6 +50,8 @@ const classLimits = {
 	"resume__education-time": 30,
 	"resume__email-header": 1000,
 	"resume__email-text": 100,
+    "resume__interests-header": 100,
+    "resume__education-header": 100,
 }
 
 const tags = "p, h1, h2, h3, h4, h5"

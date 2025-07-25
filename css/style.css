@@ -56,9 +56,8 @@ body {
 }
 
 [contenteditable="true"]:focus {
-  outline: 0    
+	outline: 0;
 }
-
 
 a {
 	font-weight: 500;
@@ -107,8 +106,8 @@ button {
 	background-color: #000;
 	cursor: pointer;
 	transition: border-color 0.25s;
-    color: #fff;
-    display: block;
+	color: #fff;
+	display: block;
 }
 button:hover {
 	border-color: #646cff;
@@ -117,8 +116,6 @@ button:focus,
 button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
 }
-
-
 
 /* ---------- CONTAINERS ---------- */
 
@@ -465,7 +462,7 @@ button:focus-visible {
 
 .resume__email {
 	width: 100%;
-	max-width: 267px;
+	/* max-width: 267px; */
 	padding: 12px;
 	border-radius: var(--radius-md);
 	background: var(--color-text);
@@ -476,8 +473,10 @@ button:focus-visible {
 	font-size: 14px;
 	line-height: 150%;
 	margin-bottom: 10px;
-	word-wrap: break-word; /* старое имя */
+
+	white-space: normal;
 	overflow-wrap: break-word;
+	word-break: break-word;
 }
 
 .resume__email-text {
@@ -486,6 +485,10 @@ button:focus-visible {
 	color: #ddd;
 	font-weight: 400;
 	font-family: var(--font-family);
+
+	white-space: normal;
+	overflow-wrap: break-word;
+	word-break: break-word;
 }
 
 .ripple {
