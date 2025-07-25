@@ -1,34 +1,10 @@
 /* jshint esversion: 6 */
 
-import html2pdf from "html2pdf.js"
-import "../css/style.css"
-import "../css/keyframes.css"
-import "../css/media.css"
-
-// import "../css/style.css"
-// import javascriptLogo from "../javascript.svg"
-// import viteLogo from "/vite.svg"
-// import { setupCounter } from "./counter.js"
-
-// document.querySelector("#app").innerHTML = `
-//   <div>
-//     <a href="https://vitejs.dev" target="_blank">
-//       <img src="${viteLogo}" class="logo" alt="Vite logo" />
-//     </a>
-//     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-//       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-//     </a>
-//     <h1>Hello Vite!</h1>
-//     <div class="card">
-//       <button id="counter" type="button"></button>
-//     </div>
-//     <p class="read-the-docs">
-//       Click on the Vite logo to learn more
-//     </p>
-//   </div>
-// `;
-
-// setupCounter(document.querySelector("#counter"));
+import html2pdf from "html2pdf.js";
+import "../css/style.css";
+import "../css/keyframes.css";
+import "../css/media.css";
+import "../css/animation.css";
 
 const classLimits = {
 	"resume__greeting": 30,
@@ -41,162 +17,176 @@ const classLimits = {
 	"resume__education-tags": 100,
 	"resume__education-program": 30,
 	"resume__interests-item": 30,
-	"resume__email-text": 30,
+	"resume__email-text": 100,
 	"resume__section-title": 30,
 	"resume__name": 24,
 	"resume__job-title": 30,
 	"resume__section-header": 30,
 	"resume__tools-title": 30,
-	"resume__education-time": 30,
+	"resume__education-time": 15,
 	"resume__email-header": 1000,
-	"resume__email-text": 100,
 	"resume__interests-header": 100,
 	"resume__education-header": 100,
-}
+};
 
-const tags = "p, h1, h2, h3, h4, h5"
+const tags = "p, h1, h2, h3, h4, h5";
 
 // Функция сохранения в localStorage
 function saveContent(key, value) {
-	localStorage.setItem(key, value)
+	localStorage.setItem(key, value);
 }
 // Функция загрузки из localStorage
 function loadContent(key) {
-	return localStorage.getItem(key)
-}
-
-function getStorageKey(el) {
-	// Найдём класс из classLimits, который есть у элемента
-	return Object.keys(classLimits).find(cls => el.classList.contains(cls))
+	return localStorage.getItem(key);
 }
 
 document.querySelectorAll(tags).forEach((el, idx) => {
 	const matchedClass = Object.keys(classLimits).find(cls =>
 		el.classList.contains(cls)
-	)
+	);
 	if (matchedClass) {
-		const limit = classLimits[matchedClass]
-		el.setAttribute("contenteditable", "true")
-		el.setAttribute("spellcheck", "false")
+		const limit = classLimits[matchedClass];
+		el.setAttribute("contenteditable", "true");
+		el.setAttribute("spellcheck", "false");
 
-		// Используем класс + индекс для уникального ключа
-		const storageKey = matchedClass + "-" + idx
+		// Уникальный ключ
+		const storageKey = matchedClass + "-" + idx;
 
 		// Загружаем сохраненный текст, если есть
-		const saved = loadContent(storageKey)
+		const saved = loadContent(storageKey);
 		if (saved) {
-			el.innerText = saved
+			el.innerText = saved;
 		}
 
 		el.addEventListener("input", () => {
 			if (el.innerText.length > limit) {
-				el.innerText = el.innerText.slice(0, limit)
-				// курсор в конец
-				const range = document.createRange()
-				const sel = window.getSelection()
-				range.selectNodeContents(el)
-				range.collapse(false)
-				sel.removeAllRanges()
-				sel.addRange(range)
+				el.innerText = el.innerText.slice(0, limit);
+				const range = document.createRange();
+				const sel = window.getSelection();
+				range.selectNodeContents(el);
+				range.collapse(false);
+				sel.removeAllRanges();
+				sel.addRange(range);
 			}
-			saveContent(storageKey, el.innerText)
-		})
+			saveContent(storageKey, el.innerText);
+		});
 	}
-})
+});
 
 document.querySelectorAll(".resume__job-list li").forEach(el => {
-	const limit = 1000
-	el.setAttribute("contenteditable", "true")
-	el.setAttribute("spellcheck", "false")
+	const limit = 1000;
+	el.setAttribute("contenteditable", "true");
+	el.setAttribute("spellcheck", "false");
 
-	// Для li используем уникальный ключ (класс + первые 10 символов текста)
-	const storageKey = el.className + "-" + el.textContent.slice(0, 10)
+	// используем уникальный ключ
+	const storageKey = el.className + "-" + el.textContent.slice(0, 10);
 
 	// Загружаем сохраненный текст, если есть
-	const saved = loadContent(storageKey)
+	const saved = loadContent(storageKey);
 	if (saved) {
-		el.innerText = saved
+		el.innerText = saved;
 	}
 
 	el.addEventListener("input", () => {
 		if (el.innerText.length > limit) {
-			el.innerText = el.innerText.slice(0, limit)
+			el.innerText = el.innerText.slice(0, limit);
 			// курсор в конец
-			const range = document.createRange()
-			const sel = window.getSelection()
-			range.selectNodeContents(el)
-			range.collapse(false)
-			sel.removeAllRanges()
-			sel.addRange(range)
+			const range = document.createRange();
+			const sel = window.getSelection();
+			range.selectNodeContents(el);
+			range.collapse(false);
+			sel.removeAllRanges();
+			sel.addRange(range);
 		}
-		saveContent(storageKey, el.innerText)
-	})
-})
+		saveContent(storageKey, el.innerText);
+	});
+});
+
+document.querySelectorAll("p, h1, h2, h3, h4, h5").forEach(el => {
+	el.classList.add("ripple");
+
+	el.addEventListener("click", function (e) {
+		const ripple = document.createElement("span");
+		ripple.classList.add("ripple-effect");
+
+		const rect = el.getBoundingClientRect();
+		const size = Math.max(rect.width, rect.height);
+		ripple.style.width = ripple.style.height = size + "px";
+
+		const x = e.clientX - rect.left - size / 2;
+		const y = e.clientY - rect.top - size / 2;
+		ripple.style.left = x + "px";
+		ripple.style.top = y + "px";
+
+		el.appendChild(ripple);
+
+		ripple.addEventListener("animationend", () => {
+			ripple.remove();
+		});
+	});
+});
+
+document
+	.querySelectorAll(".resume__language-range")
+	.forEach((wrapper, index) => {
+		const input = wrapper.querySelector(".range-input");
+		const fill = wrapper.querySelector(".range-fill");
+
+		const storageKey = `language-range-${index}`;
+
+		const savedValue = localStorage.getItem(storageKey);
+		if (savedValue !== null) {
+			input.value = savedValue;
+			fill.style.width = savedValue + "%";
+		} else {
+			fill.style.width = input.value + "%";
+		}
+
+		input.addEventListener("input", () => {
+			fill.style.width = input.value + "%";
+			localStorage.setItem(storageKey, input.value);
+		});
+	});
 
 document.getElementById("download-btn").addEventListener("click", () => {
-	const element = document.querySelector(".resume")
+	const element = document.querySelector(".resume");
 
-	document.getElementById("download-btn").style.display = "none"
+	const fadedElements = Array.from(document.querySelectorAll(".fade-in"));
+
+	fadedElements.forEach(el => el.classList.remove("fade-in"));
+
+	const downloadBtn = document.getElementById("download-btn");
+	downloadBtn.style.display = "none";
 
 	const opt = {
-		margin: 0.5,
+		margin: 0,
 		filename: "resume.pdf",
 		image: { type: "jpeg", quality: 0.98 },
-		html2canvas: { scale: 3 },
-		jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-	}
+		html2canvas: {
+			scale: 2,
+			useCORS: true,
+		},
+		jsPDF: {
+			unit: "mm",
+			format: "a4",
+			orientation: "portrait",
+		},
+		pagebreak: { mode: ["css", "avoid-all"] },
+	};
 
 	html2pdf()
 		.set(opt)
 		.from(element)
 		.save()
 		.then(() => {
-			document.getElementById("download-btn").style.display = "block"
+			downloadBtn.style.display = "block";
+
+			fadedElements.forEach(el => el.classList.add("fade-in"));
 		})
-})
+		.catch(err => {
+			console.error("Ошибка при создании PDF:", err);
+			downloadBtn.style.display = "block";
 
-document.querySelectorAll("p, h1, h2, h3, h4, h5").forEach(el => {
-	el.classList.add("ripple") // добавляем класс, чтобы CSS применился
-
-	el.addEventListener("click", function (e) {
-		const ripple = document.createElement("span")
-		ripple.classList.add("ripple-effect")
-
-		const rect = el.getBoundingClientRect()
-		const size = Math.max(rect.width, rect.height)
-		ripple.style.width = ripple.style.height = size + "px"
-
-		const x = e.clientX - rect.left - size / 2
-		const y = e.clientY - rect.top - size / 2
-		ripple.style.left = x + "px"
-		ripple.style.top = y + "px"
-
-		el.appendChild(ripple)
-
-		ripple.addEventListener("animationend", () => {
-			ripple.remove()
-		})
-	})
-})
-
-document
-	.querySelectorAll(".resume__language-range")
-	.forEach((wrapper, index) => {
-		const input = wrapper.querySelector(".range-input")
-		const fill = wrapper.querySelector(".range-fill")
-
-		const storageKey = `language-range-${index}`
-
-		const savedValue = localStorage.getItem(storageKey)
-		if (savedValue !== null) {
-			input.value = savedValue
-			fill.style.width = savedValue + "%"
-		} else {
-			fill.style.width = input.value + "%"
-		}
-
-		input.addEventListener("input", () => {
-			fill.style.width = input.value + "%"
-			localStorage.setItem(storageKey, input.value)
-		})
-	})
+			fadedElements.forEach(el => el.classList.add("fade-in"));
+		});
+});

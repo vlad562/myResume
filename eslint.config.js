@@ -10,8 +10,8 @@ export default defineConfig([
 		languageOptions: { globals: globals.browser },
 		env: {
 			es2021: true,
-			browser: true, // если код для браузера
-			node: true, // если используешь Node.js API
+			browser: true, 
+			node: true,
 		},
 		parserOptions: {
 			sourceType: "module",

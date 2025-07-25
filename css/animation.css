@@ -1,0 +1,35 @@
+.ripple {
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.ripple span.ripple-effect {
+	position: absolute;
+	border-radius: 50%;
+	transform: scale(0);
+	animation: ripple-animation 600ms linear;
+	background-color: rgba(0, 0, 0, 0.3);
+	pointer-events: none;
+}
+
+.fade-in {
+	opacity: 0;
+	transform: translateY(10px);
+	animation: fadeInUp 0.6s ease forwards;
+}
+
+[contenteditable]:focus:not(.resume__tools-title) {
+	transform: scale(1.02);
+}
+
+p:hover,
+li:hover,
+h1:hover,
+h2:hover,
+h3:not(.resume__tools-title):hover,
+h4:hover,
+h5:hover {
+	transition: all 0.3s ease;
+	transform: scale(1.02);
+}
