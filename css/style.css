@@ -205,6 +205,10 @@ button:focus-visible {
 	margin-bottom: var(--spacing-xs);
 }
 
+.resume__language-name {
+    width: 58px;
+}
+
 .resume__language-bar {
 	flex: 1;
 	height: 10px;

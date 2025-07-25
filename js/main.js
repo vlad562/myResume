@@ -38,7 +38,7 @@ const classLimits = {
 	"resume__job-position": 30,
 	"resume__job-company": 30,
 	"resume__education-text": 30,
-	"resume__education-tags": 30,
+	"resume__education-tags": 100,
 	"resume__education-program": 30,
 	"resume__interests-item": 30,
 	"resume__email-text": 30,
@@ -50,8 +50,8 @@ const classLimits = {
 	"resume__education-time": 30,
 	"resume__email-header": 1000,
 	"resume__email-text": 100,
-    "resume__interests-header": 100,
-    "resume__education-header": 100,
+	"resume__interests-header": 100,
+	"resume__education-header": 100,
 }
 
 const tags = "p, h1, h2, h3, h4, h5"
@@ -70,7 +70,7 @@ function getStorageKey(el) {
 	return Object.keys(classLimits).find(cls => el.classList.contains(cls))
 }
 
-document.querySelectorAll(tags).forEach(el => {
+document.querySelectorAll(tags).forEach((el, idx) => {
 	const matchedClass = Object.keys(classLimits).find(cls =>
 		el.classList.contains(cls)
 	)
@@ -79,8 +79,11 @@ document.querySelectorAll(tags).forEach(el => {
 		el.setAttribute("contenteditable", "true")
 		el.setAttribute("spellcheck", "false")
 
-		// Загружаем сохраненный текст, если есть, используя matchedClass как ключ
-		const saved = loadContent(matchedClass)
+		// Используем класс + индекс для уникального ключа
+		const storageKey = matchedClass + "-" + idx
+
+		// Загружаем сохраненный текст, если есть
+		const saved = loadContent(storageKey)
 		if (saved) {
 			el.innerText = saved
 		}
@@ -96,12 +99,10 @@ document.querySelectorAll(tags).forEach(el => {
 				sel.removeAllRanges()
 				sel.addRange(range)
 			}
-			// Сохраняем под стабильным ключом matchedClass
-			saveContent(matchedClass, el.innerText)
+			saveContent(storageKey, el.innerText)
 		})
 	}
 })
-
 
 document.querySelectorAll(".resume__job-list li").forEach(el => {
 	const limit = 1000
