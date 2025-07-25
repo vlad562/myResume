@@ -40,8 +40,11 @@
 
 /* ---------- BASE ---------- */
 
-body {
+* {
 	box-sizing: border-box;
+}
+
+body {
 	margin: 0;
 	display: flex;
 	place-items: center;
@@ -50,6 +53,10 @@ body {
 	color: var(--color-text);
 	border-radius: var(--radius-md);
 	font-size: var(--font-size-sm);
+
+
+
+    
 }
 
 a {
@@ -156,9 +163,9 @@ button:focus-visible {
 
 .resume__intro {
 	padding: var(--spacing-sm);
-	flex: 1 1 1;
 	text-align: center;
 	min-width: 100px;
+	flex: 1 1 0;
 }
 
 .resume__greeting {
@@ -230,7 +237,7 @@ button:focus-visible {
 	border-radius: var(--radius-md);
 	padding: var(--padding-md);
 	width: 100%;
-	max-width: 387px;
+	max-width: 411px;
 }
 
 .resume__job {
@@ -316,7 +323,7 @@ button:focus-visible {
 .resume__tools {
 	padding: var(--font-size-sm) 24px;
 	width: 100%;
-	max-width: 76px;
+	max-width: 124px;
 	/* display: none; */
 }
 
@@ -373,10 +380,9 @@ button:focus-visible {
 
 .resume__education {
 	padding: 12px 8px 12px 12px;
-	/* width: 100%;
-	max-width: 248px; */
+	width: 100%;
+	max-width: 268px;
 
-    
 }
 
 .resume__education-header {
@@ -427,15 +433,14 @@ button:focus-visible {
 
 .resume__additionally {
 	width: 100%;
-	max-width: 243px;
-	flex: 1 1 0;
+	max-width: 267px;
+	flex: 1 0 0;
 }
 
 .resume__interests {
 	width: 100%;
 	padding: var(--spacing-sm);
 	margin-bottom: 20px;
-	flex: 1 1 0;
 }
 
 .resume__interests-header {
@@ -468,7 +473,7 @@ button:focus-visible {
 
 .resume__email {
 	width: 100%;
-	max-width: 243px;
+	max-width: 267px;
 	padding: 12px;
 	border-radius: var(--radius-md);
 	background: var(--color-text);
@@ -495,12 +500,34 @@ button:focus-visible {
 
 /* header */
 
+@media (max-width: 551px) {
+	.resume__education {
+		width: 124px;
+	}
+
+    .resume__additionally {
+        max-width: 100%;
+    }
+
+    .resume__email {
+        max-width: 100%;
+    }
+
+    .resume__interests {
+        height: 69%;
+    }
+}
+
 @media (max-width: 577px) {
 	.resume__intro {
 		flex: 1 1 0;
 	}
 }
 
-@media (max-width: 548px) {
-    .
+
+@media (max-width: 407px) {
+    .resume__education {
+        width: 100%;
+        flex: 1 0 0;
+    }
 }
